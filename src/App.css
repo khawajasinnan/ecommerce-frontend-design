@@ -1,0 +1,42 @@
+/* ============================================
+   APP SHELL STYLES
+   ============================================ */
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    padding: var(--space-8) 0;
+}
+
+.main-content__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-9) var(--space-6);
+    border: 2px dashed var(--gray-200);
+    border-radius: var(--radius-lg);
+    background: var(--gray-50);
+    min-height: 400px;
+}
+
+.main-content__placeholder h1 {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
+    color: var(--gray-700);
+    margin-bottom: var(--space-3);
+}
+
+.main-content__placeholder p {
+    font-size: var(--fs-base);
+    color: var(--gray-400);
+    max-width: 480px;
+    line-height: 1.6;
+}

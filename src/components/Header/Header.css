@@ -1,0 +1,285 @@
+/* ============================================
+   HEADER STYLES — Ecommerce Web Design
+   Matched to Figma CSS export exactly
+   ============================================ */
+
+/* ── Top Bar ── */
+.top-bar {
+    display: none;
+    /* Top bar is merged into main header per Figma */
+}
+
+/* ── Main Header ── */
+.main-header {
+    background: var(--white);
+    padding: 0;
+    height: 86px;
+    display: flex;
+    align-items: center;
+}
+
+.main-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+/* Logo */
+.main-header__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.main-header__logo-img {
+    height: 46px;
+    width: auto;
+}
+
+/* Search */
+.main-header__search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border: 1px solid #0D6EFD;
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 665px;
+    height: 40px;
+}
+
+.main-header__search-input {
+    flex: 1;
+    padding: 0 14px;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1C1C1C;
+    background: var(--white);
+    border: none;
+    outline: none;
+    min-width: 0;
+}
+
+.main-header__search-input::placeholder {
+    color: #8B96A5;
+}
+
+.main-header__search-category {
+    padding: 0 12px;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1C1C1C;
+    background: var(--white);
+    border: none;
+    border-left: 1px solid #0D6EFD;
+    cursor: pointer;
+    min-width: 140px;
+    appearance: auto;
+    outline: none;
+}
+
+.main-header__search-btn {
+    padding: 0 20px;
+    height: 100%;
+    /* Figma: primary-gradient */
+    background: linear-gradient(180deg, #127FFF 0%, #0067FF 100%);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+.main-header__search-btn:hover {
+    opacity: 0.9;
+}
+
+/* User Actions */
+.main-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-shrink: 0;
+}
+
+.main-header__action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.main-header__action:hover svg {
+    stroke: var(--primary);
+}
+
+.main-header__action:hover .main-header__action-label {
+    color: var(--primary);
+}
+
+.main-header__action-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    /* Figma: gray-500 */
+    color: #8B96A5;
+    transition: color 0.2s;
+}
+
+/* ── Navigation Bar ── (Figma: Layout/navbar-alibaba) */
+.nav-bar {
+    /* Figma: white bg with top/bottom borders */
+    background: #FFFFFF;
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.nav-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+}
+
+.nav-bar__links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.nav-bar__item {}
+
+.nav-bar__link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    /* Figma: dark text */
+    color: #1C1C1C;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    white-space: nowrap;
+    transition: color 0.2s, background 0.2s;
+    border-radius: var(--radius-sm);
+}
+
+.nav-bar__link:hover {
+    color: #0D6EFD;
+    background: rgba(13, 110, 253, 0.06);
+}
+
+.nav-bar__hamburger-icon {
+    margin-right: 4px;
+}
+
+.nav-bar__chevron {
+    margin-left: 2px;
+    flex-shrink: 0;
+}
+
+.nav-bar__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+.nav-bar__right-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* Figma: dark text */
+    color: #1C1C1C;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.nav-bar__right-link:hover {
+    color: #0D6EFD;
+}
+
+.nav-bar__flag {
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar__flag-img {
+    width: 22px;
+    height: 16px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .main-header__inner {
+        flex-wrap: wrap;
+        gap: var(--space-3);
+    }
+
+    .main-header__search {
+        order: 3;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .main-header__actions {
+        display: none;
+    }
+
+    .nav-bar {
+        display: none;
+    }
+
+    .nav-bar--open {
+        display: block;
+    }
+
+    .nav-bar--open .nav-bar__inner {
+        flex-direction: column;
+        height: auto;
+        padding: var(--space-3) 0;
+        align-items: flex-start;
+    }
+
+    .nav-bar--open .nav-bar__links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-bar--open .nav-bar__link {
+        width: 100%;
+        padding: var(--space-3) var(--space-4);
+        border-radius: 0;
+    }
+
+    .nav-bar--open .nav-bar__right {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        padding: var(--space-3) var(--space-4);
+        border-top: 1px solid #E0E0E0;
+        margin-top: var(--space-2);
+        gap: var(--space-3);
+    }
+}
