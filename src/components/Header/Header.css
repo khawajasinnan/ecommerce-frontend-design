@@ -141,6 +141,43 @@
     transition: color 0.2s;
 }
 
+.main-header__action--cart {
+    position: relative;
+}
+
+.main-header__cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: #FA3434;
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    animation: badgePop 0.3s ease;
+}
+
+@keyframes badgePop {
+    0% {
+        transform: scale(0);
+    }
+
+    60% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* ── Navigation Bar ── (Figma: Layout/navbar-alibaba) */
 .nav-bar {
     /* Figma: white bg with top/bottom borders */

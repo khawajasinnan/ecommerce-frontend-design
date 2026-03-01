@@ -1,20 +1,21 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
 import './Header.css'
 
 const Header = () => {
+    const navigate = useNavigate()
+    const { cartCount } = useContext(CartContext)
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('All category')
-    const [cartCount] = useState(0)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const categories = [
         'All category',
         'Electronics',
-        'Fashion',
-        'Home & Garden',
-        'Sports',
-        'Automobiles',
-        'Accessories',
+        'Mobile accessory',
+        'Smartphones',
+        'Modern tech',
     ]
 
     const navLinks = [
@@ -27,7 +28,9 @@ const Header = () => {
     ]
 
     const handleSearch = () => {
-        console.log('Search:', searchQuery, 'Category:', selectedCategory)
+        if (searchQuery.trim()) {
+            navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
+        }
     }
 
     return (
@@ -36,13 +39,13 @@ const Header = () => {
             <div className="main-header">
                 <div className="container main-header__inner">
                     {/* Logo */}
-                    <a href="/" className="main-header__logo">
+                    <Link to="/" className="main-header__logo">
                         <img
                             src="/assets/Layout/Brand/logo-colored.png"
                             alt="Brand"
                             className="main-header__logo-img"
                         />
-                    </a>
+                    </Link>
 
                     {/* Search Bar */}
                     <div className="main-header__search">
@@ -72,33 +75,33 @@ const Header = () => {
 
                     {/* User Actions (gray-500 #8B96A5 icons) */}
                     <div className="main-header__actions">
-                        <a href="#" className="main-header__action">
+                        <Link to="#" className="main-header__action">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B96A5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                                 <circle cx="12" cy="7" r="4" />
                             </svg>
                             <span className="main-header__action-label">Profile</span>
-                        </a>
-                        <a href="#" className="main-header__action">
+                        </Link>
+                        <Link to="#" className="main-header__action">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B96A5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                             </svg>
                             <span className="main-header__action-label">Message</span>
-                        </a>
-                        <a href="#" className="main-header__action">
+                        </Link>
+                        <Link to="#" className="main-header__action">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B96A5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                             </svg>
                             <span className="main-header__action-label">Orders</span>
-                        </a>
-                        <a href="#" className="main-header__action">
+                        </Link>
+                        <Link to="/cart" className="main-header__action main-header__action--cart">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B96A5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                             </svg>
                             <span className="main-header__action-label">My cart</span>
-                            {cartCount > 0 && <span className="top-bar__badge">{cartCount}</span>}
-                        </a>
+                            {cartCount > 0 && <span className="main-header__cart-badge">{cartCount}</span>}
+                        </Link>
                     </div>
                 </div>
             </div>

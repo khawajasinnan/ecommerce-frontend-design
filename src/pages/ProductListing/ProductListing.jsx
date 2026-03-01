@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useMemo } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import './ProductListing.css'
 
 /* ── Product Data with categories, brands, features, condition ── */
@@ -204,6 +204,8 @@ const Stars = ({ count }) => (
 
 /* ── Main Component ── */
 const ProductListing = () => {
+    const [searchParams] = useSearchParams()
+    const searchQuery = searchParams.get('search') || ''
     const [currentPage, setCurrentPage] = useState(1)
     const [viewMode, setViewMode] = useState('grid') /* grid | list */
     const [selectedCategory, setSelectedCategory] = useState('')
@@ -217,6 +219,8 @@ const ProductListing = () => {
 
     /* Filter logic — ALL filters applied */
     const filteredProducts = allProducts.filter(p => {
+        // Search filter
+        if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase()) && !p.description.toLowerCase().includes(searchQuery.toLowerCase())) return false
         // Category filter
         if (selectedCategory && p.category !== selectedCategory) return false
         // Brand filter
@@ -502,7 +506,7 @@ const ProductListing = () => {
                                 {paginatedProducts.map(product => (
                                     viewMode === 'grid' ? (
                                         /* Grid Card */
-                                        <div key={product.id} className="plp__card">
+                                        <Link to={`/products/${product.id}`} key={product.id} className="plp__card">
                                             <div className="plp__card-img-wrap">
                                                 <img src={product.img} alt={product.name} className="plp__card-img" />
                                             </div>
@@ -516,7 +520,7 @@ const ProductListing = () => {
                                                 </div>
                                                 <Stars count={product.rating} />
                                             </div>
-                                        </div>
+                                        </Link>
                                     ) : (
                                         /* List Row */
                                         <div key={product.id} className="plp__list-item">
@@ -534,7 +538,7 @@ const ProductListing = () => {
                                                 <Stars count={product.rating} />
                                                 <p className="plp__list-desc">{product.description}</p>
                                                 <span className="plp__list-shipping">{product.shipping}</span>
-                                                <a href="#" className="plp__list-detail">View detail</a>
+                                                <Link to={`/products/${product.id}`} className="plp__list-detail">View detail</Link>
                                             </div>
                                         </div>
                                     )

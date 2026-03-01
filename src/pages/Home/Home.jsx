@@ -16,11 +16,11 @@ const heroCategories = [
 ]
 
 const dealProducts = [
-    { name: 'Smart watches', discount: '-25%', img: '/assets/Image/tech/image 34.png' },
-    { name: 'Laptops', discount: '-15%', img: '/assets/Image/tech/image 29.png' },
-    { name: 'GoPro cameras', discount: '-40%', img: '/assets/Image/tech/image 23.png' },
-    { name: 'Headphones', discount: '-25%', img: '/assets/Image/tech/image 85.png' },
-    { name: 'Canon cameras', discount: '-25%', img: '/assets/Image/tech/image 32.png' },
+    { id: 8, name: 'Smart watches', discount: '-25%', img: '/assets/Image/tech/image 34.png' },
+    { id: 3, name: 'Laptops', discount: '-15%', img: '/assets/Image/tech/image 29.png' },
+    { id: 1, name: 'GoPro cameras', discount: '-40%', img: '/assets/Image/tech/image 23.png' },
+    { id: 7, name: 'Headphones', discount: '-25%', img: '/assets/Image/tech/image 85.png' },
+    { id: 2, name: 'Canon cameras', discount: '-25%', img: '/assets/Image/tech/image 32.png' },
 ]
 
 const homeOutdoorItems = [
@@ -46,16 +46,16 @@ const electronicsItems = [
 ]
 
 const recommendedItems = [
-    { price: '$10.30', name: 'T-shirts with multiple colors, for men', img: '/assets/Layout/alibaba/Image/cloth/Bitmap.png' },
-    { price: '$10.30', name: 'Jeans shorts for men blue color', img: '/assets/Layout/alibaba/Image/cloth/image 24.png' },
-    { price: '$12.50', name: 'Brown winter coat medium size', img: '/assets/Layout/alibaba/Image/cloth/image 30.png' },
-    { price: '$34.00', name: 'Jeans bag for travel for men', img: '/assets/Layout/alibaba/Image/cloth/image 26.png' },
-    { price: '$99.00', name: 'Leather wallet', img: '/assets/Layout/alibaba/Image/cloth/Bitmap (2).png' },
-    { price: '$9.99', name: 'Canon camera black, 100x zoom', img: '/assets/Image/tech/image 23.png' },
-    { price: '$8.99', name: 'Headset for gaming with mic', img: '/assets/Image/tech/image 85.png' },
-    { price: '$13.30', name: 'Smartwatch silver color modern', img: '/assets/Image/tech/image 34.png' },
-    { price: '$10.30', name: 'Blue wallet for men leather', img: '/assets/Layout/alibaba/Image/cloth/2 1.png' },
-    { price: '$80.95', name: 'Jeans bag for travel for men', img: '/assets/Image/tech/image 29.png' },
+    { id: 4, price: '$10.30', name: 'T-shirts with multiple colors, for men', img: '/assets/Layout/alibaba/Image/cloth/Bitmap.png' },
+    { id: 5, price: '$10.30', name: 'Jeans shorts for men blue color', img: '/assets/Layout/alibaba/Image/cloth/image 24.png' },
+    { id: 6, price: '$12.50', name: 'Brown winter coat medium size', img: '/assets/Layout/alibaba/Image/cloth/image 30.png' },
+    { id: 4, price: '$34.00', name: 'Jeans bag for travel for men', img: '/assets/Layout/alibaba/Image/cloth/image 26.png' },
+    { id: 9, price: '$99.00', name: 'Leather wallet', img: '/assets/Layout/alibaba/Image/cloth/Bitmap (2).png' },
+    { id: 1, price: '$9.99', name: 'Canon camera black, 100x zoom', img: '/assets/Image/tech/image 23.png' },
+    { id: 7, price: '$8.99', name: 'Headset for gaming with mic', img: '/assets/Image/tech/image 85.png' },
+    { id: 8, price: '$13.30', name: 'Smartwatch silver color modern', img: '/assets/Image/tech/image 34.png' },
+    { id: 9, price: '$10.30', name: 'Blue wallet for men leather', img: '/assets/Layout/alibaba/Image/cloth/2 1.png' },
+    { id: 3, price: '$80.95', name: 'Jeans bag for travel for men', img: '/assets/Image/tech/image 29.png' },
 ]
 
 const extraServices = [
@@ -145,7 +145,7 @@ const Home = () => {
                         <ul className="hero__cat-list">
                             {heroCategories.map((cat, i) => (
                                 <li key={i}>
-                                    <a href="#" className="hero__cat-link">{cat}</a>
+                                    <Link to={`/products?search=${encodeURIComponent(cat)}`} className="hero__cat-link">{cat}</Link>
                                 </li>
                             ))}
                         </ul>
@@ -156,7 +156,7 @@ const Home = () => {
                         <div className="hero__banner-content">
                             <span className="hero__banner-label">Latest trending</span>
                             <h2 className="hero__banner-title">Electronic items</h2>
-                            <a href="#" className="hero__banner-btn">Learn more</a>
+                            <Link to="/products" className="hero__banner-btn">Learn more</Link>
                         </div>
                         <img
                             src="/assets/Image/backgrounds/Banner-board-800x420 2.png"
@@ -172,8 +172,8 @@ const Home = () => {
                                 <img src="/assets/Image/profile-avatar.png" alt="User avatar" className="hero__user-avatar" />
                                 <span className="hero__user-greeting">Hi, user<br />let's get started</span>
                             </div>
-                            <a href="#" className="hero__user-btn hero__user-btn--join">Join now</a>
-                            <a href="#" className="hero__user-btn hero__user-btn--login">Log in</a>
+                            <Link to="/signup" className="hero__user-btn hero__user-btn--join">Join now</Link>
+                            <Link to="/signin" className="hero__user-btn hero__user-btn--login">Log in</Link>
                         </div>
                         <div className="hero__promo hero__promo--orange">
                             Get US $10 off with a new supplier
@@ -201,13 +201,13 @@ const Home = () => {
                         </div>
                     </div>
                     {dealProducts.map((item, i) => (
-                        <div key={i} className="deals__card">
+                        <Link to={`/products/${item.id}`} key={i} className="deals__card">
                             <div className="deals__card-img-wrap">
                                 <img src={item.img} alt={item.name} className="deals__card-img" />
                             </div>
                             <span className="deals__card-name">{item.name}</span>
                             <span className="deals__card-badge">{item.discount}</span>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
@@ -219,7 +219,7 @@ const Home = () => {
                         <img src="/assets/Image/backgrounds/Group 969.png" alt="" className="category-panel__banner-bg" />
                         <div className="category-panel__banner-overlay">
                             <h3 className="category-panel__banner-title">Home and<br />outdoor</h3>
-                            <a href="#" className="category-panel__banner-btn">Source now</a>
+                            <Link to="/products" className="category-panel__banner-btn">Source now</Link>
                         </div>
                     </div>
                     <div className="category-panel__grid">
@@ -243,7 +243,7 @@ const Home = () => {
                         <img src="/assets/Image/backgrounds/image 98.png" alt="" className="category-panel__banner-bg" />
                         <div className="category-panel__banner-overlay">
                             <h3 className="category-panel__banner-title">Consumer<br />electronics and<br />gadgets</h3>
-                            <a href="#" className="category-panel__banner-btn">Source now</a>
+                            <Link to="/products" className="category-panel__banner-btn">Source now</Link>
                         </div>
                     </div>
                     <div className="category-panel__grid">
@@ -295,7 +295,7 @@ const Home = () => {
                     <h3 className="recommended__title">Recommended items</h3>
                     <div className="recommended__grid">
                         {recommendedItems.map((item, i) => (
-                            <Link to="/products" key={i} className="recommended__card">
+                            <Link to={`/products/${item.id}`} key={i} className="recommended__card">
                                 <div className="recommended__card-img-wrap">
                                     <img src={item.img} alt={item.name} className="recommended__card-img" />
                                 </div>
