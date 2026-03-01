@@ -9,6 +9,7 @@ const Checkout = () => {
 
     const [step, setStep] = useState(1) // 1: shipping, 2: payment, 3: confirm
     const [orderPlaced, setOrderPlaced] = useState(false)
+    const [errors, setErrors] = useState({})
 
     const [shipping, setShipping] = useState({
         firstName: '', lastName: '', email: '', phone: '',
@@ -26,11 +27,68 @@ const Checkout = () => {
     const total = subtotal + shippingCost + tax
 
     const handleShippingChange = (e) => {
-        setShipping(prev => ({ ...prev, [e.target.name]: e.target.value }))
+        const { name, value } = e.target
+        setShipping(prev => ({ ...prev, [name]: value }))
+        if (errors[name]) {
+            setErrors(prev => { const next = { ...prev }; delete next[name]; return next })
+        }
     }
 
     const handlePaymentChange = (e) => {
-        setPayment(prev => ({ ...prev, [e.target.name]: e.target.value }))
+        const { name, value } = e.target
+        setPayment(prev => ({ ...prev, [name]: value }))
+        if (errors[name]) {
+            setErrors(prev => { const next = { ...prev }; delete next[name]; return next })
+        }
+    }
+
+    /* ── Validation ── */
+    const validateShipping = () => {
+        const newErrors = {}
+        if (!shipping.firstName.trim()) newErrors.firstName = 'First name is required'
+        if (!shipping.lastName.trim()) newErrors.lastName = 'Last name is required'
+        if (!shipping.email.trim()) {
+            newErrors.email = 'Email is required'
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(shipping.email)) {
+            newErrors.email = 'Enter a valid email address'
+        }
+        if (!shipping.address.trim()) newErrors.address = 'Address is required'
+        if (!shipping.city.trim()) newErrors.city = 'City is required'
+        if (!shipping.zip.trim()) newErrors.zip = 'ZIP code is required'
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
+    const validatePayment = () => {
+        const newErrors = {}
+        if (payment.method === 'card') {
+            if (!payment.cardNumber.trim()) {
+                newErrors.cardNumber = 'Card number is required'
+            } else if (payment.cardNumber.replace(/\s/g, '').length < 16) {
+                newErrors.cardNumber = 'Enter a valid 16-digit card number'
+            }
+            if (!payment.expiry.trim()) {
+                newErrors.expiry = 'Expiry date is required'
+            } else if (!/^\d{2}\/\d{2}$/.test(payment.expiry)) {
+                newErrors.expiry = 'Use MM/YY format'
+            }
+            if (!payment.cvv.trim()) {
+                newErrors.cvv = 'CVV is required'
+            } else if (payment.cvv.length < 3) {
+                newErrors.cvv = 'CVV must be 3-4 digits'
+            }
+            if (!payment.cardName.trim()) newErrors.cardName = 'Cardholder name is required'
+        }
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
+    const handleNextShipping = () => {
+        if (validateShipping()) setStep(2)
+    }
+
+    const handleNextPayment = () => {
+        if (validatePayment()) setStep(3)
     }
 
     const handlePlaceOrder = (e) => {
@@ -121,42 +179,58 @@ const Checkout = () => {
                                     </svg>
                                     Shipping Information
                                 </h2>
-                                <div className="checkout__grid-2">
-                                    <div className="checkout__field">
-                                        <label>First Name *</label>
-                                        <input type="text" name="firstName" value={shipping.firstName} onChange={handleShippingChange} placeholder="John" required />
+
+                                {Object.keys(errors).length > 0 && (
+                                    <div className="checkout__error-banner">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                                        </svg>
+                                        Please fill in all required fields to continue
                                     </div>
-                                    <div className="checkout__field">
-                                        <label>Last Name *</label>
-                                        <input type="text" name="lastName" value={shipping.lastName} onChange={handleShippingChange} placeholder="Doe" required />
+                                )}
+
+                                <div className="checkout__grid-2">
+                                    <div className={`checkout__field ${errors.firstName ? 'checkout__field--error' : ''}`}>
+                                        <label>First Name <span className="checkout__required">*</span></label>
+                                        <input type="text" name="firstName" value={shipping.firstName} onChange={handleShippingChange} placeholder="John" />
+                                        {errors.firstName && <span className="checkout__field-error">{errors.firstName}</span>}
+                                    </div>
+                                    <div className={`checkout__field ${errors.lastName ? 'checkout__field--error' : ''}`}>
+                                        <label>Last Name <span className="checkout__required">*</span></label>
+                                        <input type="text" name="lastName" value={shipping.lastName} onChange={handleShippingChange} placeholder="Doe" />
+                                        {errors.lastName && <span className="checkout__field-error">{errors.lastName}</span>}
                                     </div>
                                 </div>
                                 <div className="checkout__grid-2">
-                                    <div className="checkout__field">
-                                        <label>Email *</label>
-                                        <input type="email" name="email" value={shipping.email} onChange={handleShippingChange} placeholder="john@example.com" required />
+                                    <div className={`checkout__field ${errors.email ? 'checkout__field--error' : ''}`}>
+                                        <label>Email <span className="checkout__required">*</span></label>
+                                        <input type="email" name="email" value={shipping.email} onChange={handleShippingChange} placeholder="john@example.com" />
+                                        {errors.email && <span className="checkout__field-error">{errors.email}</span>}
                                     </div>
                                     <div className="checkout__field">
                                         <label>Phone</label>
                                         <input type="tel" name="phone" value={shipping.phone} onChange={handleShippingChange} placeholder="+1 (555) 123-4567" />
                                     </div>
                                 </div>
-                                <div className="checkout__field">
-                                    <label>Address *</label>
-                                    <input type="text" name="address" value={shipping.address} onChange={handleShippingChange} placeholder="123 Main Street, Apt 4B" required />
+                                <div className={`checkout__field ${errors.address ? 'checkout__field--error' : ''}`}>
+                                    <label>Address <span className="checkout__required">*</span></label>
+                                    <input type="text" name="address" value={shipping.address} onChange={handleShippingChange} placeholder="123 Main Street, Apt 4B" />
+                                    {errors.address && <span className="checkout__field-error">{errors.address}</span>}
                                 </div>
                                 <div className="checkout__grid-3">
-                                    <div className="checkout__field">
-                                        <label>City *</label>
-                                        <input type="text" name="city" value={shipping.city} onChange={handleShippingChange} placeholder="New York" required />
+                                    <div className={`checkout__field ${errors.city ? 'checkout__field--error' : ''}`}>
+                                        <label>City <span className="checkout__required">*</span></label>
+                                        <input type="text" name="city" value={shipping.city} onChange={handleShippingChange} placeholder="New York" />
+                                        {errors.city && <span className="checkout__field-error">{errors.city}</span>}
                                     </div>
                                     <div className="checkout__field">
                                         <label>State</label>
                                         <input type="text" name="state" value={shipping.state} onChange={handleShippingChange} placeholder="NY" />
                                     </div>
-                                    <div className="checkout__field">
-                                        <label>ZIP Code *</label>
-                                        <input type="text" name="zip" value={shipping.zip} onChange={handleShippingChange} placeholder="10001" required />
+                                    <div className={`checkout__field ${errors.zip ? 'checkout__field--error' : ''}`}>
+                                        <label>ZIP Code <span className="checkout__required">*</span></label>
+                                        <input type="text" name="zip" value={shipping.zip} onChange={handleShippingChange} placeholder="10001" />
+                                        {errors.zip && <span className="checkout__field-error">{errors.zip}</span>}
                                     </div>
                                 </div>
                                 <div className="checkout__field">
@@ -171,7 +245,7 @@ const Checkout = () => {
                                         <option>Pakistan</option>
                                     </select>
                                 </div>
-                                <button className="checkout__next-btn" onClick={() => setStep(2)}>
+                                <button className="checkout__next-btn" onClick={handleNextShipping}>
                                     Continue to Payment
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -190,6 +264,15 @@ const Checkout = () => {
                                     Payment Method
                                 </h2>
 
+                                {Object.keys(errors).length > 0 && (
+                                    <div className="checkout__error-banner">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                                        </svg>
+                                        Please fill in all payment details to continue
+                                    </div>
+                                )}
+
                                 <div className="checkout__payment-methods">
                                     {[
                                         { id: 'card', label: 'Credit / Debit Card', icon: '💳' },
@@ -206,23 +289,27 @@ const Checkout = () => {
 
                                 {payment.method === 'card' && (
                                     <div className="checkout__card-fields">
-                                        <div className="checkout__field">
-                                            <label>Card Number</label>
+                                        <div className={`checkout__field ${errors.cardNumber ? 'checkout__field--error' : ''}`}>
+                                            <label>Card Number <span className="checkout__required">*</span></label>
                                             <input type="text" name="cardNumber" value={payment.cardNumber} onChange={handlePaymentChange} placeholder="1234 5678 9012 3456" maxLength={19} />
+                                            {errors.cardNumber && <span className="checkout__field-error">{errors.cardNumber}</span>}
                                         </div>
                                         <div className="checkout__grid-2">
-                                            <div className="checkout__field">
-                                                <label>Expiry Date</label>
+                                            <div className={`checkout__field ${errors.expiry ? 'checkout__field--error' : ''}`}>
+                                                <label>Expiry Date <span className="checkout__required">*</span></label>
                                                 <input type="text" name="expiry" value={payment.expiry} onChange={handlePaymentChange} placeholder="MM/YY" maxLength={5} />
+                                                {errors.expiry && <span className="checkout__field-error">{errors.expiry}</span>}
                                             </div>
-                                            <div className="checkout__field">
-                                                <label>CVV</label>
+                                            <div className={`checkout__field ${errors.cvv ? 'checkout__field--error' : ''}`}>
+                                                <label>CVV <span className="checkout__required">*</span></label>
                                                 <input type="text" name="cvv" value={payment.cvv} onChange={handlePaymentChange} placeholder="123" maxLength={4} />
+                                                {errors.cvv && <span className="checkout__field-error">{errors.cvv}</span>}
                                             </div>
                                         </div>
-                                        <div className="checkout__field">
-                                            <label>Name on Card</label>
+                                        <div className={`checkout__field ${errors.cardName ? 'checkout__field--error' : ''}`}>
+                                            <label>Name on Card <span className="checkout__required">*</span></label>
                                             <input type="text" name="cardName" value={payment.cardName} onChange={handlePaymentChange} placeholder="John Doe" />
+                                            {errors.cardName && <span className="checkout__field-error">{errors.cardName}</span>}
                                         </div>
                                     </div>
                                 )}
@@ -240,13 +327,13 @@ const Checkout = () => {
                                 )}
 
                                 <div className="checkout__btn-row">
-                                    <button className="checkout__back-btn" onClick={() => setStep(1)}>
+                                    <button className="checkout__back-btn" onClick={() => { setErrors({}); setStep(1) }}>
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M19 12H5M12 19l-7-7 7-7" />
                                         </svg>
                                         Back
                                     </button>
-                                    <button className="checkout__next-btn" onClick={() => setStep(3)}>
+                                    <button className="checkout__next-btn" onClick={handleNextPayment}>
                                         Review Order
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M5 12h14M12 5l7 7-7 7" />

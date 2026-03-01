@@ -5,7 +5,7 @@ import './Header.css'
 
 const Header = () => {
     const navigate = useNavigate()
-    const { cartCount } = useContext(CartContext)
+    const { cartCount, cartItems } = useContext(CartContext)
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('All category')
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -176,17 +176,43 @@ const Header = () => {
                                 <div className="header-dropdown header-dropdown--orders">
                                     <div className="header-dropdown__header">
                                         <span className="header-dropdown__title">My Orders</span>
+                                        {cartItems.length > 0 && (
+                                            <span className="header-dropdown__count">{cartItems.length} item{cartItems.length > 1 ? 's' : ''}</span>
+                                        )}
                                     </div>
-                                    <div className="header-dropdown__empty">
-                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#DEE2E7" strokeWidth="1.5">
-                                            <rect x="2" y="3" width="20" height="18" rx="2" />
-                                            <path d="M8 7h8M8 11h6M8 15h4" />
-                                        </svg>
-                                        <p>No orders yet</p>
-                                        <span>Your orders will appear here</span>
-                                    </div>
-                                    <Link to="/products" className="header-dropdown__footer-link" onClick={() => setActiveDropdown(null)}>
-                                        Start Shopping →
+                                    {cartItems.length === 0 ? (
+                                        <div className="header-dropdown__empty">
+                                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#DEE2E7" strokeWidth="1.5">
+                                                <rect x="2" y="3" width="20" height="18" rx="2" />
+                                                <path d="M8 7h8M8 11h6M8 15h4" />
+                                            </svg>
+                                            <p>No orders yet</p>
+                                            <span>Your orders will appear here</span>
+                                        </div>
+                                    ) : (
+                                        <div className="header-dropdown__order-list">
+                                            {cartItems.slice(0, 3).map(item => (
+                                                <Link
+                                                    key={item.id}
+                                                    to={`/products/${item.product_id}`}
+                                                    className="header-dropdown__order-item"
+                                                    onClick={() => setActiveDropdown(null)}
+                                                >
+                                                    <img src={item.img} alt={item.name} className="header-dropdown__order-img" />
+                                                    <div className="header-dropdown__order-info">
+                                                        <span className="header-dropdown__order-name">{item.name}</span>
+                                                        <span className="header-dropdown__order-meta">Qty: {item.quantity} · ${(Number(item.price) * item.quantity).toFixed(2)}</span>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <Link
+                                        to={cartItems.length > 0 ? '/cart' : '/products'}
+                                        className="header-dropdown__footer-link"
+                                        onClick={() => setActiveDropdown(null)}
+                                    >
+                                        {cartItems.length > 0 ? `View all in cart →` : 'Start Shopping →'}
                                     </Link>
                                 </div>
                             )}

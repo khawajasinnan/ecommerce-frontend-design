@@ -520,6 +520,65 @@
     margin: 4px 0 8px;
 }
 
+/* ── Validation Errors ── */
+.checkout__error-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #FFF0F0;
+    border: 1px solid #FFCDD2;
+    border-radius: 6px;
+    color: #D32F2F;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    animation: shakeBanner 0.4s ease;
+}
+
+@keyframes shakeBanner {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-6px);
+    }
+
+    40% {
+        transform: translateX(6px);
+    }
+
+    60% {
+        transform: translateX(-4px);
+    }
+
+    80% {
+        transform: translateX(4px);
+    }
+}
+
+.checkout__field--error input,
+.checkout__field--error select {
+    border-color: #EF5350 !important;
+    box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.12) !important;
+}
+
+.checkout__field-error {
+    display: block;
+    font-size: 12px;
+    color: #D32F2F;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.checkout__required {
+    color: #EF5350;
+    font-weight: 600;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .checkout__layout {

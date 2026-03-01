@@ -4,191 +4,295 @@
 
 /* ── Keyframes ── */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes shimmer {
-    0% {
-        background-position: -200% center;
-    }
-
-    100% {
-        background-position: 200% center;
-    }
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
 }
 
 @keyframes pulseGlow {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 0 0 8px rgba(13, 110, 253, 0);
-    }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.3); }
+    50%      { box-shadow: 0 0 0 8px rgba(13, 110, 253, 0); }
 }
 
 @keyframes bounceIn {
-    0% {
-        transform: scale(0.3);
-        opacity: 0;
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    70% {
-        transform: scale(0.9);
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0%   { transform: scale(0.3); opacity: 0; }
+    50%  { transform: scale(1.05); }
+    70%  { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-6px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
 }
 
-/* ── Page Transition ── */
+@keyframes gentleBob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25%      { transform: translateY(-4px) rotate(0.5deg); }
+    75%      { transform: translateY(2px) rotate(-0.5deg); }
+}
+
+@keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes ripple {
+    to { transform: scale(4); opacity: 0; }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-12px); max-height: 0; }
+    to   { opacity: 1; transform: translateY(0); max-height: 500px; }
+}
+
+@keyframes textReveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes borderDraw {
+    from { stroke-dashoffset: 1000; }
+    to   { stroke-dashoffset: 0; }
+}
+
+@keyframes shine {
+    0%   { left: -100%; }
+    100% { left: 200%; }
+}
+
+@keyframes countPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25%  { transform: rotate(-3deg); }
+    75%  { transform: rotate(3deg); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotateIn {
+    from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+    to   { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+
+/* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
 .main-content {
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.35s ease-out;
 }
 
-/* ── Card Animations ── */
-.plp__card,
-.recommended__card,
-.deals__card,
-.category-panel__item {
+/* ============================================
+   HERO SECTION ANIMATIONS
+   ============================================ */
+.hero__inner {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Category sidebar links slide in staggered */
+.hero__cat-link {
+    opacity: 0;
+    animation: slideInLeft 0.35s ease-out forwards;
+    position: relative;
+    overflow: hidden;
+}
+.hero__cat-link:nth-child(1) { animation-delay: 0.05s; }
+.hero__cat-link:nth-child(2) { animation-delay: 0.08s; }
+.hero__cat-link:nth-child(3) { animation-delay: 0.11s; }
+.hero__cat-link:nth-child(4) { animation-delay: 0.14s; }
+.hero__cat-link:nth-child(5) { animation-delay: 0.17s; }
+.hero__cat-link:nth-child(6) { animation-delay: 0.20s; }
+.hero__cat-link:nth-child(7) { animation-delay: 0.23s; }
+.hero__cat-link:nth-child(8) { animation-delay: 0.26s; }
+.hero__cat-link:nth-child(9) { animation-delay: 0.29s; }
+
+/* Category link hover — highlight bar slides in */
+.hero__cat-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--primary);
+    transform: scaleY(0);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hero__cat-link:hover::before {
+    transform: scaleY(1);
+}
+
+/* Banner content text reveal */
+.hero__banner-content {
+    animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.hero__banner-label {
+    animation: fadeIn 0.5s ease-out 0.3s both;
+}
+
+.hero__banner-title {
+    animation: textReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+/* Hero banner image Ken Burns zoom */
+.hero__banner-img {
+    animation: kenBurns 20s ease-in-out infinite alternate;
+}
+@keyframes kenBurns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
+/* Right panel — user card slides down */
+.hero__user-card {
+    animation: slideDown 0.4s ease-out 0.2s both;
+}
+
+/* Promo cards float gently */
+.hero__promo {
     animation: fadeInUp 0.4s ease-out both;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero__promo:nth-child(2) { animation-delay: 0.3s; }
+.hero__promo:nth-child(3) { animation-delay: 0.4s; }
+
+.hero__promo:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.plp__card:nth-child(1),
-.recommended__card:nth-child(1),
-.deals__card:nth-child(1) {
-    animation-delay: 0.05s;
+/* ============================================
+   DEALS SECTION
+   ============================================ */
+/* Countdown timer boxes pulse */
+.deals__timer-box {
+    animation: fadeInUp 0.3s ease-out both;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+.deals__timer-box:nth-child(1) { animation-delay: 0.1s; }
+.deals__timer-box:nth-child(2) { animation-delay: 0.15s; }
+.deals__timer-box:nth-child(3) { animation-delay: 0.2s; }
+.deals__timer-box:nth-child(4) { animation-delay: 0.25s; }
+
+.deals__timer-box:hover {
+    transform: scale(1.1);
+    background: #404040;
 }
 
-.plp__card:nth-child(2),
-.recommended__card:nth-child(2),
-.deals__card:nth-child(2) {
-    animation-delay: 0.1s;
+/* Timer value number animation */
+.deals__timer-val {
+    animation: countPulse 2s ease-in-out infinite;
 }
 
-.plp__card:nth-child(3),
-.recommended__card:nth-child(3),
-.deals__card:nth-child(3) {
-    animation-delay: 0.15s;
+/* Deal discount badges bounce in */
+.deals__card-badge {
+    animation: bounceIn 0.5s ease-out both;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+.deals__card:nth-child(2) .deals__card-badge { animation-delay: 0.1s; }
+.deals__card:nth-child(3) .deals__card-badge { animation-delay: 0.15s; }
+.deals__card:nth-child(4) .deals__card-badge { animation-delay: 0.2s; }
+.deals__card:nth-child(5) .deals__card-badge { animation-delay: 0.25s; }
+.deals__card:nth-child(6) .deals__card-badge { animation-delay: 0.3s; }
+
+.deals__card-badge:hover {
+    transform: scale(1.15);
+    background: #ffd0d0;
 }
 
-.plp__card:nth-child(4),
-.recommended__card:nth-child(4),
-.deals__card:nth-child(4) {
-    animation-delay: 0.2s;
+/* Deal card images float on hover */
+.deals__card-img {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.deals__card:hover .deals__card-img {
+    transform: scale(1.12) translateY(-4px);
 }
 
-.plp__card:nth-child(5),
-.recommended__card:nth-child(5),
-.deals__card:nth-child(5) {
-    animation-delay: 0.25s;
+/* ============================================
+   CATEGORY PANEL ANIMATIONS
+   ============================================ */
+/* Banner title slides in */
+.category-panel__banner-title {
+    animation: slideInLeft 0.5s ease-out 0.15s both;
 }
 
-.plp__card:nth-child(6),
-.recommended__card:nth-child(6) {
-    animation-delay: 0.3s;
+/* Banner button fades up */
+.category-panel__banner-btn {
+    animation: fadeInUp 0.4s ease-out 0.3s both;
+    position: relative;
+    overflow: hidden;
 }
 
-.plp__card:nth-child(7),
-.recommended__card:nth-child(7) {
-    animation-delay: 0.35s;
+/* Category items have staggered entrance */
+.category-panel__item {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease,
+                background 0.2s ease;
 }
 
-.plp__card:nth-child(8),
-.recommended__card:nth-child(8) {
-    animation-delay: 0.4s;
+.category-panel__item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    background: #F0F6FF;
 }
 
-.plp__card:nth-child(9),
-.recommended__card:nth-child(9) {
-    animation-delay: 0.45s;
+/* Category item images zoom + rotate slightly on hover */
+.category-panel__item-img {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.category-panel__item:hover .category-panel__item-img {
+    transform: scale(1.12) rotate(3deg);
 }
 
-.plp__card:nth-child(10),
-.recommended__card:nth-child(10) {
-    animation-delay: 0.5s;
+/* Banner background subtle zoom */
+.category-panel__banner-bg {
+    transition: transform 8s ease;
+}
+.category-panel__banner:hover .category-panel__banner-bg {
+    transform: scale(1.05);
 }
 
-/* ── Card Hover Effects ── */
+/* ============================================
+   CARD HOVER EFFECTS (everywhere)
+   ============================================ */
 .plp__card,
 .recommended__card,
 .deals__card {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 0.3s ease;
+                box-shadow 0.3s ease;
 }
 
 .plp__card:hover,
@@ -202,86 +306,117 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* ── Image Hover Zoom ── */
+/* Shine effect on card hover */
+.plp__card::after,
+.recommended__card::after,
+.deals__card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: none;
+    pointer-events: none;
+}
+.plp__card,
+.recommended__card,
+.deals__card {
+    position: relative;
+    overflow: hidden;
+}
+.plp__card:hover::after,
+.recommended__card:hover::after,
+.deals__card:hover::after {
+    animation: shine 0.6s ease-out;
+}
+
+/* Image zoom on hover */
 .plp__card-img,
 .recommended__card-img,
 .deals__card-img,
 .plp__list-img,
 .pdp__thumb,
 .pdp__main-img {
-    transition: transform 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .plp__card:hover .plp__card-img,
-.recommended__card:hover .recommended__card-img,
-.deals__card:hover .deals__card-img {
-    transform: scale(1.08);
+.recommended__card:hover .recommended__card-img {
+    transform: scale(1.1);
 }
 
 .plp__list-item:hover .plp__list-img {
-    transform: scale(1.05);
+    transform: scale(1.06);
 }
 
-/* ── List View Items ── */
+/* ============================================
+   LIST VIEW ANIMATIONS
+   ============================================ */
 .plp__list-item {
-    animation: slideInLeft 0.4s ease-out both;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .plp__list-item:hover {
-    transform: translateX(4px);
+    transform: translateX(6px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.plp__list-item:nth-child(1) {
-    animation-delay: 0.05s;
-}
-
-.plp__list-item:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.plp__list-item:nth-child(3) {
-    animation-delay: 0.15s;
-}
-
-.plp__list-item:nth-child(4) {
-    animation-delay: 0.2s;
-}
-
-.plp__list-item:nth-child(5) {
-    animation-delay: 0.25s;
-}
-
-.plp__list-item:nth-child(6) {
-    animation-delay: 0.3s;
-}
-
-/* ── Button Hover Effects ── */
-.plp__filter-apply,
-.plp__clear-btn,
-.category-panel__banner-btn,
+/* ============================================
+   BUTTON ANIMATIONS (Global ripple effect)
+   ============================================ */
 .hero__banner-btn,
 .hero__user-btn,
+.category-panel__banner-btn,
+.plp__filter-apply,
 .cart__checkout-btn,
 .cart__shop-btn,
 .checkout__next-btn,
 .checkout__place-btn,
-.auth__submit {
-    transition: transform 0.2s ease, opacity 0.2s ease,
-        box-shadow 0.3s ease, background 0.2s ease;
+.auth__submit,
+.inquiry__submit,
+.newsletter__submit {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease,
+                box-shadow 0.3s ease,
+                background 0.2s ease,
+                opacity 0.2s ease;
 }
 
-.plp__filter-apply:hover,
+/* Button hover lift */
+.hero__banner-btn:hover,
+.category-panel__banner-btn:hover,
 .cart__checkout-btn:hover,
 .cart__shop-btn:hover,
-.category-panel__banner-btn:hover,
-.hero__banner-btn:hover {
+.inquiry__submit:hover,
+.newsletter__submit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.25);
 }
 
-/* ── Filter Sidebar Animation ── */
+/* Button active press */
+.hero__banner-btn:active,
+.hero__user-btn:active,
+.category-panel__banner-btn:active,
+.plp__filter-apply:active,
+.cart__checkout-btn:active,
+.auth__submit:active,
+.inquiry__submit:active,
+.newsletter__submit:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+}
+
+/* ============================================
+   FILTER SIDEBAR
+   ============================================ */
 .plp__sidebar {
     animation: slideInLeft 0.3s ease-out;
 }
@@ -289,276 +424,350 @@
 .plp__filter-section {
     animation: fadeIn 0.4s ease-out both;
 }
+.plp__filter-section:nth-child(1) { animation-delay: 0.1s; }
+.plp__filter-section:nth-child(2) { animation-delay: 0.15s; }
+.plp__filter-section:nth-child(3) { animation-delay: 0.2s; }
+.plp__filter-section:nth-child(4) { animation-delay: 0.25s; }
+.plp__filter-section:nth-child(5) { animation-delay: 0.3s; }
+.plp__filter-section:nth-child(6) { animation-delay: 0.35s; }
 
-.plp__filter-section:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.plp__filter-section:nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-.plp__filter-section:nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.plp__filter-section:nth-child(4) {
-    animation-delay: 0.25s;
-}
-
-.plp__filter-section:nth-child(5) {
-    animation-delay: 0.3s;
-}
-
-.plp__filter-section:nth-child(6) {
-    animation-delay: 0.35s;
-}
-
-/* ── Filter Chip Animations ── */
+/* Filter chip animations */
 .plp__filter-chip {
     animation: scaleIn 0.2s ease-out;
     transition: transform 0.2s ease, background 0.2s ease;
 }
-
 .plp__filter-chip:hover {
     transform: scale(1.05);
     background: #d0e3ff;
 }
 
-/* ── Category sidebar active state indicator ── */
+/* Active category bar indicator */
 .plp__filter-item {
     position: relative;
     padding-left: 0;
     transition: color 0.2s ease, padding-left 0.2s ease;
 }
-
 .plp__filter-item--active {
     padding-left: 12px;
 }
-
 .plp__filter-item--active::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 50%;
+    left: 0; top: 50%;
     transform: translateY(-50%);
-    width: 4px;
-    height: 16px;
+    width: 4px; height: 16px;
     background: var(--primary);
     border-radius: 2px;
     animation: scaleIn 0.2s ease-out;
 }
 
-/* ── Home Page Section Animations ── */
-.hero__wrapper {
-    animation: fadeInUp 0.5s ease-out;
-}
-
-.deals {
-    animation: fadeInUp 0.5s ease-out 0.1s both;
-}
-
-.category-panel {
-    animation: fadeInUp 0.5s ease-out 0.2s both;
-}
-
-.category-panel__item {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.2s ease;
-}
-
-.category-panel__item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    background: #F0F6FF;
-}
-
-.recommended__grid {
-    animation: fadeIn 0.5s ease-out 0.3s both;
-}
-
-/* ── Inquiry / Extra Services ── */
-.extra-service__card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.extra-service__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* ── Pagination Buttons ── */
+/* ============================================
+   PAGINATION
+   ============================================ */
 .plp__page-btn {
     transition: all 0.2s ease, transform 0.2s ease;
 }
-
 .plp__page-btn:hover {
     transform: translateY(-2px);
 }
-
 .plp__page-btn--active {
     animation: pulseGlow 1.5s ease infinite;
 }
 
-/* ── Toolbar Animation ── */
+/* Toolbar */
 .plp__toolbar {
     animation: slideInRight 0.3s ease-out;
 }
 
-/* ── View Toggle Active ── */
+/* View toggle */
 .plp__view-btn {
     transition: all 0.2s ease, transform 0.2s ease;
 }
-
 .plp__view-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.12);
 }
-
 .plp__view-btn--active {
     transform: scale(1.05);
 }
 
-/* ── Sort Select ── */
+/* Sort select focus */
 .plp__sort-select {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
 .plp__sort-select:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
 }
 
-/* ── Product Detail Page ── */
+/* ============================================
+   PRODUCT DETAIL PAGE
+   ============================================ */
 .pdp__gallery {
     animation: fadeIn 0.4s ease-out;
 }
-
 .pdp__info {
     animation: slideInRight 0.4s ease-out;
 }
-
 .pdp__thumb {
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
-
 .pdp__thumb:hover {
-    transform: scale(1.1);
+    transform: scale(1.12);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
 .pdp__tab {
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-/* ── Cart Page ── */
+/* PDP main image zoom on hover */
+.pdp__main-img:hover {
+    transform: scale(1.03);
+}
+
+/* Related product cards */
+.pdp__related-card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.pdp__related-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* ============================================
+   CART PAGE
+   ============================================ */
 .cart__item {
     animation: slideInLeft 0.3s ease-out both;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
-
 .cart__item:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transform: translateX(3px);
 }
-
-.cart__item:nth-child(1) {
-    animation-delay: 0.05s;
-}
-
-.cart__item:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.cart__item:nth-child(3) {
-    animation-delay: 0.15s;
-}
-
-.cart__item:nth-child(4) {
-    animation-delay: 0.2s;
-}
+.cart__item:nth-child(1) { animation-delay: 0.05s; }
+.cart__item:nth-child(2) { animation-delay: 0.1s; }
+.cart__item:nth-child(3) { animation-delay: 0.15s; }
+.cart__item:nth-child(4) { animation-delay: 0.2s; }
 
 .cart__summary {
     animation: slideInRight 0.4s ease-out;
 }
 
+/* Quantity buttons */
 .cart__qty-btn {
     transition: background 0.2s ease, transform 0.15s ease;
 }
-
 .cart__qty-btn:hover {
-    transform: scale(1.15);
+    transform: scale(1.2);
 }
-
 .cart__qty-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
 }
 
-/* ── Checkout Steps ── */
+/* Cart item image hover */
+.cart__item-img {
+    transition: transform 0.3s ease;
+}
+.cart__item:hover .cart__item-img {
+    transform: scale(1.05);
+}
+
+/* ============================================
+   CHECKOUT STEPS
+   ============================================ */
 .checkout__step-circle {
     transition: all 0.3s ease;
 }
-
 .checkout__section {
     animation: fadeInUp 0.4s ease-out;
 }
-
 .checkout__payment-option {
-    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .checkout__payment-option:hover {
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
-/* ── Auth Page ── */
+/* ============================================
+   AUTH PAGE
+   ============================================ */
 .auth__wrapper {
     animation: scaleIn 0.4s ease-out;
 }
-
 .auth__brand {
     animation: slideInLeft 0.5s ease-out;
 }
-
 .auth__form-card {
     animation: slideInRight 0.5s ease-out;
 }
-
 .auth__input {
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
-
 .auth__input:focus {
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.1);
 }
 
-/* ── Header Nav Links ── */
-.header__nav-link {
-    transition: color 0.2s ease, transform 0.2s ease;
+/* ============================================
+   INQUIRY SECTION ANIMATIONS
+   ============================================ */
+.inquiry__inner {
+    animation: fadeIn 0.5s ease-out;
 }
 
-.header__nav-link:hover {
+.inquiry__title {
+    animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.inquiry__form-card {
+    animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.inquiry__form-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.inquiry__input,
+.inquiry__textarea,
+.inquiry__select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.inquiry__input:focus,
+.inquiry__textarea:focus,
+.inquiry__select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.08);
     transform: translateY(-1px);
 }
 
-/* ── Footer Links ── */
+/* ============================================
+   EXTRA SERVICES CARDS
+   ============================================ */
+.extra-services__card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    overflow: hidden;
+}
+.extra-services__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* Card image zoom on hover */
+.extra-services__card-img {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.extra-services__card:hover .extra-services__card-img {
+    transform: scale(1.08);
+}
+
+/* Floating icon */
+.extra-services__card-icon {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+}
+.extra-services__card:hover .extra-services__card-icon {
+    transform: translateY(-4px) scale(1.1);
+    background: #b4d5ff;
+}
+
+/* ============================================
+   NEWSLETTER SECTION
+   ============================================ */
+.newsletter__inner {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.newsletter__input-wrap {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.newsletter__input-wrap:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.08);
+}
+
+/* ============================================
+   SUPPLIERS SECTION
+   ============================================ */
+.suppliers__region {
+    transition: transform 0.2s ease, background 0.2s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+.suppliers__region:hover {
+    transform: translateX(4px);
+    background: #F0F6FF;
+}
+
+.suppliers__flag {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.suppliers__region:hover .suppliers__flag {
+    transform: scale(1.2);
+}
+
+/* ============================================
+   RECOMMENDED ITEMS
+   ============================================ */
+.recommended__card-img {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.recommended__card:hover .recommended__card-img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Price highlight on hover */
+.recommended__card-price {
+    transition: color 0.2s ease;
+}
+.recommended__card:hover .recommended__card-price {
+    color: var(--primary);
+}
+
+/* ============================================
+   HEADER NAV LINKS
+   ============================================ */
+.nav-bar__link {
+    position: relative;
+}
+.nav-bar__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 0; height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease, left 0.3s ease;
+}
+.nav-bar__link:hover::after {
+    width: 80%; left: 10%;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
 .footer a {
     transition: color 0.2s ease, transform 0.2s ease;
 }
-
 .footer a:hover {
-    transform: translateX(2px);
+    transform: translateX(3px);
+    color: var(--primary);
 }
 
-/* ── Smooth scrollbar ── */
-* {
-    scroll-behavior: smooth;
-}
+/* ============================================
+   GLOBAL UTILITIES
+   ============================================ */
 
-/* ── Focus visible ring ── */
+/* Smooth scrolling */
+* { scroll-behavior: smooth; }
+
+/* Focus ring */
 *:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
     border-radius: 4px;
 }
 
-/* ── Loading skeleton shimmer ── */
+/* Skeleton shimmer */
 .skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -568,19 +777,16 @@
 
 /* ============================================
    SCROLL-REVEAL ANIMATIONS
-   Elements start hidden and animate in when
-   they enter the viewport via IntersectionObserver.
    ============================================ */
 
 /* Base reveal (fade up) */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
-
 .reveal--visible {
     opacity: 1;
     transform: translateY(0);
@@ -590,11 +796,10 @@
 .reveal-left {
     opacity: 0;
     transform: translateX(-30px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
-
 .reveal-left.reveal--visible {
     opacity: 1;
     transform: translateX(0);
@@ -604,11 +809,10 @@
 .reveal-right {
     opacity: 0;
     transform: translateX(30px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
-
 .reveal-right.reveal--visible {
     opacity: 1;
     transform: translateX(0);
@@ -617,13 +821,28 @@
 /* Scale up */
 .reveal-scale {
     opacity: 0;
-    transform: scale(0.92);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.9);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
-
 .reveal-scale.reveal--visible {
     opacity: 1;
     transform: scale(1);
+}
+
+/* ============================================
+   REDUCED MOTION (Accessibility)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1;
+        transform: none;
+    }
 }

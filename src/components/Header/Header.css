@@ -334,6 +334,73 @@
     background: #F0F6FF;
 }
 
+/* ── Order items list in dropdown ── */
+.header-dropdown--orders {
+    width: 320px;
+}
+
+.header-dropdown__count {
+    font-size: 12px;
+    font-weight: 500;
+    color: #8B96A5;
+    margin-left: auto;
+}
+
+.header-dropdown__order-list {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.header-dropdown__order-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: background 0.2s;
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.header-dropdown__order-item:last-child {
+    border-bottom: none;
+}
+
+.header-dropdown__order-item:hover {
+    background: #F0F6FF;
+}
+
+.header-dropdown__order-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border: 1px solid #EFF2F4;
+    border-radius: 6px;
+    padding: 4px;
+    flex-shrink: 0;
+    background: #FAFAFA;
+}
+
+.header-dropdown__order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.header-dropdown__order-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1C1C1C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-dropdown__order-meta {
+    font-size: 12px;
+    color: #8B96A5;
+}
+
 /* ── Navigation Bar ── (Figma: Layout/navbar-alibaba) */
 .nav-bar {
     /* Figma: white bg with top/bottom borders */

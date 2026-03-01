@@ -244,10 +244,12 @@
 
 .cart__coupon-input {
     flex: 1;
+    min-width: 0;
     padding: 8px 12px;
     font-size: 13px;
     border: none;
     outline: none;
+    color: var(--gray-700);
 }
 
 .cart__coupon-btn {
@@ -255,9 +257,12 @@
     background: var(--primary);
     color: var(--white);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, background 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: none;
 }
 
 .cart__coupon-btn:hover {
