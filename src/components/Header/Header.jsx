@@ -1,15 +1,18 @@
 import { useState, useContext, useRef, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
 import './Header.css'
 
 const Header = () => {
     const navigate = useNavigate()
     const { cartCount, cartItems } = useContext(CartContext)
+    const { t, lang, setLang, languages, currentLang } = useLanguage()
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('All category')
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [activeDropdown, setActiveDropdown] = useState(null)
+    const [langOpen, setLangOpen] = useState(false)
     const dropdownRef = useRef(null)
 
     const categories = [
@@ -70,7 +73,7 @@ const Header = () => {
                         <input
                             type="text"
                             className="main-header__search-input"
-                            placeholder="Search"
+                            placeholder={t('search')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -100,7 +103,7 @@ const Header = () => {
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                                     <circle cx="12" cy="7" r="4" />
                                 </svg>
-                                <span className="main-header__action-label">Profile</span>
+                                <span className="main-header__action-label">{t('profile')}</span>
                             </button>
                             {activeDropdown === 'profile' && (
                                 <div className="header-dropdown">
@@ -146,7 +149,7 @@ const Header = () => {
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B96A5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                                 </svg>
-                                <span className="main-header__action-label">Message</span>
+                                <span className="main-header__action-label">{t('message')}</span>
                             </button>
                             {activeDropdown === 'message' && (
                                 <div className="header-dropdown header-dropdown--messages">
@@ -170,7 +173,7 @@ const Header = () => {
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B96A5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                 </svg>
-                                <span className="main-header__action-label">Orders</span>
+                                <span className="main-header__action-label">{t('orders')}</span>
                             </button>
                             {activeDropdown === 'orders' && (
                                 <div className="header-dropdown header-dropdown--orders">
@@ -224,7 +227,7 @@ const Header = () => {
                                 <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                             </svg>
-                            <span className="main-header__action-label">My cart</span>
+                            <span className="main-header__action-label">{t('myCart')}</span>
                             {cartCount > 0 && <span className="main-header__cart-badge">{cartCount}</span>}
                         </Link>
                     </div>
@@ -254,14 +257,36 @@ const Header = () => {
                         ))}
                     </ul>
                     <div className="nav-bar__right">
+                        <div className="nav-bar__lang-wrap">
+                            <button className="nav-bar__right-link" onClick={() => setLangOpen(prev => !prev)}>
+                                <span className="nav-bar__lang-flag">{currentLang?.flag}</span>
+                                {currentLang?.label}, USD
+                                <svg className={`nav-bar__chevron ${langOpen ? 'nav-bar__chevron--open' : ''}`} width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 1l4 4 4-4" stroke="#8B96A5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </button>
+                            {langOpen && (
+                                <div className="nav-bar__lang-dropdown">
+                                    {languages.map(l => (
+                                        <button
+                                            key={l.code}
+                                            className={`nav-bar__lang-option ${lang === l.code ? 'nav-bar__lang-option--active' : ''}`}
+                                            onClick={() => { setLang(l.code); setLangOpen(false) }}
+                                        >
+                                            <span className="nav-bar__lang-option-flag">{l.flag}</span>
+                                            {l.label}
+                                            {lang === l.code && (
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D6EFD" strokeWidth="3">
+                                                    <polyline points="20 6 9 17 4 12" />
+                                                </svg>
+                                            )}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                         <a href="#" className="nav-bar__right-link">
-                            English, USD
-                            <svg className="nav-bar__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                                <path d="M1 1l4 4 4-4" stroke="#8B96A5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </a>
-                        <a href="#" className="nav-bar__right-link">
-                            Ship to
+                            {t('shipTo')}
                             <span className="nav-bar__flag">
                                 <img src="/assets/Layout1/Image/flags/DE@2x.png" alt="" className="nav-bar__flag-img" />
                             </span>

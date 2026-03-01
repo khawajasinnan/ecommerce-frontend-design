@@ -243,6 +243,40 @@ const Checkout = () => {
                                         <option>France</option>
                                         <option>Australia</option>
                                         <option>Pakistan</option>
+                                        <option>India</option>
+                                        <option>China</option>
+                                        <option>Japan</option>
+                                        <option>South Korea</option>
+                                        <option>Brazil</option>
+                                        <option>Mexico</option>
+                                        <option>Italy</option>
+                                        <option>Spain</option>
+                                        <option>Netherlands</option>
+                                        <option>Turkey</option>
+                                        <option>Saudi Arabia</option>
+                                        <option>United Arab Emirates</option>
+                                        <option>South Africa</option>
+                                        <option>Nigeria</option>
+                                        <option>Egypt</option>
+                                        <option>Russia</option>
+                                        <option>Sweden</option>
+                                        <option>Norway</option>
+                                        <option>Denmark</option>
+                                        <option>Switzerland</option>
+                                        <option>Singapore</option>
+                                        <option>Malaysia</option>
+                                        <option>Indonesia</option>
+                                        <option>Thailand</option>
+                                        <option>Vietnam</option>
+                                        <option>Philippines</option>
+                                        <option>New Zealand</option>
+                                        <option>Argentina</option>
+                                        <option>Colombia</option>
+                                        <option>Chile</option>
+                                        <option>Poland</option>
+                                        <option>Portugal</option>
+                                        <option>Belgium</option>
+                                        <option>Ireland</option>
                                     </select>
                                 </div>
                                 <button className="checkout__next-btn" onClick={handleNextShipping}>

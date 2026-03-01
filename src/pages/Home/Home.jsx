@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../../context/LanguageContext'
 import './Home.css'
 
 /* ── Static data ── */
@@ -134,6 +135,13 @@ function useCountdown() {
 const Home = () => {
     const countdown = useCountdown()
     const [email, setEmail] = useState('')
+    const { t } = useLanguage()
+
+    const heroCategories = [
+        t('automobiles'), t('clothesWear'), t('homeInteriors'),
+        t('computerTech'), t('toolsEquipments'), t('sportsOutdoor'),
+        t('animalPets'), t('machineryTools'), t('moreCategory'),
+    ]
 
     return (
         <div className="home">
@@ -154,9 +162,9 @@ const Home = () => {
                     {/* Center — Banner */}
                     <div className="hero__banner">
                         <div className="hero__banner-content">
-                            <span className="hero__banner-label">Latest trending</span>
-                            <h2 className="hero__banner-title">Electronic items</h2>
-                            <Link to="/products" className="hero__banner-btn">Learn more</Link>
+                            <span className="hero__banner-label">{t('latestTrending')}</span>
+                            <h2 className="hero__banner-title">{t('electronicItems')}</h2>
+                            <Link to="/products" className="hero__banner-btn">{t('learnMore')}</Link>
                         </div>
                         <img
                             src="/assets/Image/backgrounds/Banner-board-800x420 2.png"
@@ -170,16 +178,16 @@ const Home = () => {
                         <div className="hero__user-card">
                             <div className="hero__user-row">
                                 <img src="/assets/Image/profile-avatar.png" alt="User avatar" className="hero__user-avatar" />
-                                <span className="hero__user-greeting">Hi, user<br />let's get started</span>
+                                <span className="hero__user-greeting">{t('hiUser').split('\n')[0]}<br />{t('hiUser').split('\n')[1]}</span>
                             </div>
-                            <Link to="/signup" className="hero__user-btn hero__user-btn--join">Join now</Link>
-                            <Link to="/signin" className="hero__user-btn hero__user-btn--login">Log in</Link>
+                            <Link to="/signup" className="hero__user-btn hero__user-btn--join">{t('joinNow')}</Link>
+                            <Link to="/signin" className="hero__user-btn hero__user-btn--login">{t('logIn')}</Link>
                         </div>
                         <div className="hero__promo hero__promo--orange">
-                            Get US $10 off with a new supplier
+                            {t('getDiscount')}
                         </div>
                         <div className="hero__promo hero__promo--teal">
-                            Send quotes with supplier preferences
+                            {t('sendQuotes')}
                         </div>
                     </aside>
                 </div>
@@ -189,8 +197,8 @@ const Home = () => {
             <section className="deals">
                 <div className="container deals__inner">
                     <div className="deals__info">
-                        <h3 className="deals__title">Deals and offers</h3>
-                        <p className="deals__subtitle">Hygiene equipments</p>
+                        <h3 className="deals__title">{t('dealsOffers')}</h3>
+                        <p className="deals__subtitle">{t('hygieneEquipments')}</p>
                         <div className="deals__timer">
                             {Object.entries(countdown).map(([label, val]) => (
                                 <div key={label} className="deals__timer-box">
@@ -218,7 +226,7 @@ const Home = () => {
                     <div className="category-panel__banner category-panel__banner--green">
                         <img src="/assets/Image/backgrounds/Group 969.png" alt="" className="category-panel__banner-bg" />
                         <div className="category-panel__banner-overlay">
-                            <h3 className="category-panel__banner-title">Home and<br />outdoor</h3>
+                            <h3 className="category-panel__banner-title">{t('homeOutdoor')}</h3>
                             <Link to="/products" className="category-panel__banner-btn">Source now</Link>
                         </div>
                     </div>
@@ -242,7 +250,7 @@ const Home = () => {
                     <div className="category-panel__banner category-panel__banner--blue">
                         <img src="/assets/Image/backgrounds/image 98.png" alt="" className="category-panel__banner-bg" />
                         <div className="category-panel__banner-overlay">
-                            <h3 className="category-panel__banner-title">Consumer<br />electronics and<br />gadgets</h3>
+                            <h3 className="category-panel__banner-title">{t('consumerElectronics')}</h3>
                             <Link to="/products" className="category-panel__banner-btn">Source now</Link>
                         </div>
                     </div>
@@ -292,7 +300,7 @@ const Home = () => {
             {/* ====== 6. RECOMMENDED ITEMS ====== */}
             <section className="recommended">
                 <div className="container">
-                    <h3 className="recommended__title">Recommended items</h3>
+                    <h3 className="recommended__title">{t('recommendedItems')}</h3>
                     <div className="recommended__grid">
                         {recommendedItems.map((item, i) => (
                             <Link to={`/products/${item.id}`} key={i} className="recommended__card">
@@ -312,7 +320,7 @@ const Home = () => {
             {/* ====== 7. OUR EXTRA SERVICES ====== */}
             <section className="extra-services">
                 <div className="container">
-                    <h3 className="extra-services__title">Our extra services</h3>
+                    <h3 className="extra-services__title">{t('ourExtraServices')}</h3>
                     <div className="extra-services__grid">
                         {extraServices.map((svc, i) => (
                             <div key={i} className="extra-services__card">
@@ -332,7 +340,7 @@ const Home = () => {
             {/* ====== 8. SUPPLIERS BY REGION ====== */}
             <section className="suppliers">
                 <div className="container">
-                    <h3 className="suppliers__title">Suppliers by region</h3>
+                    <h3 className="suppliers__title">{t('suppliersByRegion')}</h3>
                     <div className="suppliers__grid">
                         {supplierRegions.map((s, i) => (
                             <div key={i} className="suppliers__region">
@@ -350,7 +358,7 @@ const Home = () => {
             {/* ====== 9. NEWSLETTER ====== */}
             <section className="newsletter">
                 <div className="container newsletter__inner">
-                    <h3 className="newsletter__title">Subscribe on our newsletter</h3>
+                    <h3 className="newsletter__title">{t('subscribeNewsletter')}</h3>
                     <p className="newsletter__desc">Get daily news on upcoming offers from many suppliers all over the world</p>
                     <form className="newsletter__form" onSubmit={e => { e.preventDefault(); setEmail('') }}>
                         <div className="newsletter__input-wrap">
