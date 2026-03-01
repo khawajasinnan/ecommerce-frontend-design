@@ -16,6 +16,7 @@ build/
 
 # Assets (provided separately, not tracked in repo)
 assets/
+docs/
 
 # IDE / Editor
 .vscode/
