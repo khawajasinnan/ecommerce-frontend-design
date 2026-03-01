@@ -15,8 +15,8 @@ build/
 .env.production.local
 
 # Assets (provided separately, not tracked in repo)
-assets/
 docs/
+assets/
 
 # IDE / Editor
 .vscode/
