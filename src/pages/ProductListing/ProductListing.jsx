@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import './ProductListing.css'
 
-/* ── Product Data with categories, brands, features, condition ── */
+/* ── Product Data with correct categories, brands, images, prices ── */
 const allProducts = [
     {
         id: 1,
@@ -13,10 +13,10 @@ const allProducts = [
         rating: 4,
         orders: 154,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description: 'Professional DSLR camera with 10x optical zoom, 24.1MP sensor, built-in Wi-Fi and Full HD video recording.',
         category: 'Electronics',
-        brand: 'Samsung',
-        features: ['Metallic', '8GB Ram'],
+        brand: 'Canon',
+        features: ['Metallic', 'Super power'],
         condition: 'Brand new',
     },
     {
@@ -28,9 +28,9 @@ const allProducts = [
         rating: 5,
         orders: 154,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.',
+        description: 'Waterproof 4K action camera with advanced video stabilization, touch display, and voice control.',
         category: 'Electronics',
-        brand: 'Pocco',
+        brand: 'GoPro',
         features: ['Plastic cover', 'Super power'],
         condition: 'Brand new',
     },
@@ -39,10 +39,11 @@ const allProducts = [
         name: 'Lenovo Laptop IdeaPad 15.6" Full HD',
         img: '/assets/Image/tech/image 29.png',
         price: 998,
+        oldPrice: 1199,
         rating: 4,
         orders: 154,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        description: 'Powerful laptop with 15.6" Full HD display, 8GB RAM, 256GB SSD, and Intel Core i5 processor.',
         category: 'Modern tech',
         brand: 'Lenovo',
         features: ['Metallic', '8GB Ram'],
@@ -57,51 +58,52 @@ const allProducts = [
         rating: 4,
         orders: 250,
         shipping: 'Free Shipping',
-        description: 'Size: medium, Color: blue, Material: Jeans. Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        category: 'Mobile accessory',
-        brand: 'Samsung',
-        features: ['Plastic cover'],
+        description: 'Comfortable cotton T-shirts available in multiple colors. Size: S-XXL. Material: 100% premium cotton.',
+        category: 'Clothing',
+        brand: 'Other',
+        features: ['PVC Leather'],
         condition: 'Brand new',
     },
     {
         id: 5,
         name: 'Apple AirPods Pro with noise cancellation',
-        img: '/assets/Layout/alibaba/Image/cloth/image 24.png',
+        img: '/assets/Image/tech/image 33.png',
         price: 249,
         oldPrice: 299,
         rating: 5,
         orders: 320,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.',
+        description: 'Premium wireless earbuds with Active Noise Cancellation, Transparency mode, and spatial audio.',
         category: 'Mobile accessory',
         brand: 'Apple',
-        features: ['PVC Leather'],
-        condition: 'Refurbished',
+        features: ['Metallic', 'Super power'],
+        condition: 'Brand new',
     },
     {
         id: 6,
-        name: 'Huawei MatePad Pro 10.8" tablet',
-        img: '/assets/Layout/alibaba/Image/cloth/image 30.png',
-        price: 12.50,
+        name: 'Huawei MatePad Pro 10.8" Tablet',
+        img: '/assets/Image/tech/8.png',
+        price: 499,
+        oldPrice: 599,
         rating: 5,
         orders: 120,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.',
+        description: 'Premium tablet with 10.8" FullView display, Kirin 990 processor, and multi-screen collaboration.',
         category: 'Smartphones',
         brand: 'Huawei',
-        features: ['PVC Leather', 'Plastic cover'],
+        features: ['Metallic', '8GB Ram'],
         condition: 'Brand new',
     },
     {
         id: 7,
         name: 'Samsung Gaming Headset with mic pro',
         img: '/assets/Image/tech/image 85.png',
-        price: 8.99,
-        oldPrice: 12.00,
+        price: 89.99,
+        oldPrice: 120.00,
         rating: 3,
         orders: 86,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.',
+        description: 'Immersive gaming headset with surround sound, noise-cancelling microphone, and comfortable ear cushions.',
         category: 'Electronics',
         brand: 'Samsung',
         features: ['Plastic cover', 'Super power'],
@@ -112,10 +114,11 @@ const allProducts = [
         name: 'Apple Watch Series 7, silver color',
         img: '/assets/Image/tech/image 34.png',
         price: 399,
+        oldPrice: 449,
         rating: 4,
         orders: 200,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.',
+        description: 'Smartwatch with always-on Retina display, blood oxygen sensor, ECG, and fitness tracking.',
         category: 'Modern tech',
         brand: 'Apple',
         features: ['Metallic', 'Super power'],
@@ -123,16 +126,16 @@ const allProducts = [
     },
     {
         id: 9,
-        name: 'Huawei Leather wallet brown color',
+        name: 'Brown Leather Wallet premium quality',
         img: '/assets/Layout/alibaba/Image/cloth/Bitmap (2).png',
         price: 99.00,
         oldPrice: 120.00,
         rating: 2,
         orders: 50,
         shipping: 'Free Shipping',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
-        category: 'Mobile accessory',
-        brand: 'Huawei',
+        description: 'Genuine leather wallet with RFID blocking, multiple card slots, and coin pocket.',
+        category: 'Clothing',
+        brand: 'Other',
         features: ['PVC Leather'],
         condition: 'Old items',
     },
@@ -145,7 +148,7 @@ const allProducts = [
         rating: 4,
         orders: 180,
         shipping: 'Free Shipping',
-        description: 'Pocco X5 Pro with 5G connectivity, 128GB storage, AMOLED display.',
+        description: 'Pocco X5 Pro with 5G connectivity, 128GB storage, AMOLED display, and 67W fast charging.',
         category: 'Smartphones',
         brand: 'Pocco',
         features: ['Metallic', '8GB Ram'],
@@ -156,10 +159,11 @@ const allProducts = [
         name: 'Lenovo ThinkPad Gaming Mouse',
         img: '/assets/Image/tech/image 86.png',
         price: 25.50,
+        oldPrice: 35.00,
         rating: 3,
         orders: 95,
         shipping: 'Free Shipping',
-        description: 'Ergonomic gaming mouse with 6 programmable buttons and RGB lighting.',
+        description: 'Ergonomic gaming mouse with 6 programmable buttons, RGB lighting, and 16000 DPI sensor.',
         category: 'Electronics',
         brand: 'Lenovo',
         features: ['Plastic cover', 'Super power'],
@@ -168,13 +172,13 @@ const allProducts = [
     {
         id: 12,
         name: 'Samsung Galaxy Buds Pro wireless',
-        img: '/assets/Image/tech/image 33.png',
+        img: '/assets/Layout/alibaba/Image/cloth/image 24.png',
         price: 179,
         oldPrice: 199,
         rating: 5,
         orders: 410,
         shipping: 'Free Shipping',
-        description: 'Premium wireless earbuds with active noise cancellation and 360 audio.',
+        description: 'Premium wireless earbuds with active noise cancellation, 360 audio, and IPX7 water resistance.',
         category: 'Mobile accessory',
         brand: 'Samsung',
         features: ['Metallic', 'Super power'],
@@ -182,8 +186,8 @@ const allProducts = [
     },
 ]
 
-const categories = ['Mobile accessory', 'Electronics', 'Smartphones', 'Modern tech']
-const brands = ['Samsung', 'Apple', 'Huawei', 'Pocco', 'Lenovo']
+const categories = ['Electronics', 'Mobile accessory', 'Smartphones', 'Modern tech', 'Clothing']
+const brands = ['Samsung', 'Apple', 'Huawei', 'Pocco', 'Lenovo', 'Canon', 'GoPro', 'Other']
 const features = ['Metallic', 'Plastic cover', 'PVC Leather', '8GB Ram', 'Super power']
 const conditions = ['Any', 'Refurbished', 'Brand new', 'Old items']
 
@@ -284,9 +288,19 @@ const ProductListing = () => {
                 <nav className="plp__breadcrumb">
                     <Link to="/" className="plp__breadcrumb-link">Home</Link>
                     <span className="plp__breadcrumb-sep">{'>'}</span>
-                    <Link to="/products" className="plp__breadcrumb-link">Clothings</Link>
-                    <span className="plp__breadcrumb-sep">{'>'}</span>
-                    <span className="plp__breadcrumb-current">Men's wear</span>
+                    <Link to="/products" className="plp__breadcrumb-link" onClick={clearFilters}>Products</Link>
+                    {selectedCategory && (
+                        <>
+                            <span className="plp__breadcrumb-sep">{'>'}</span>
+                            <span className="plp__breadcrumb-current">{selectedCategory}</span>
+                        </>
+                    )}
+                    {searchQuery && (
+                        <>
+                            <span className="plp__breadcrumb-sep">{'>'}</span>
+                            <span className="plp__breadcrumb-current">Search: "{searchQuery}"</span>
+                        </>
+                    )}
                 </nav>
 
                 <div className="plp__layout">

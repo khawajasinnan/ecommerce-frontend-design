@@ -1,0 +1,629 @@
+/* ============================================
+   GLOBAL ANIMATIONS & MICRO-INTERACTIONS
+   ============================================ */
+
+/* ── Keyframes ── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(13, 110, 253, 0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* ── Page Transition ── */
+.main-content {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ── Card Animations ── */
+.plp__card,
+.recommended__card,
+.deals__card,
+.category-panel__item {
+    animation: fadeInUp 0.4s ease-out both;
+}
+
+.plp__card:nth-child(1),
+.recommended__card:nth-child(1),
+.deals__card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.plp__card:nth-child(2),
+.recommended__card:nth-child(2),
+.deals__card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.plp__card:nth-child(3),
+.recommended__card:nth-child(3),
+.deals__card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.plp__card:nth-child(4),
+.recommended__card:nth-child(4),
+.deals__card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.plp__card:nth-child(5),
+.recommended__card:nth-child(5),
+.deals__card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.plp__card:nth-child(6),
+.recommended__card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.plp__card:nth-child(7),
+.recommended__card:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.plp__card:nth-child(8),
+.recommended__card:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+.plp__card:nth-child(9),
+.recommended__card:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+.plp__card:nth-child(10),
+.recommended__card:nth-child(10) {
+    animation-delay: 0.5s;
+}
+
+/* ── Card Hover Effects ── */
+.plp__card,
+.recommended__card,
+.deals__card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.3s ease;
+}
+
+.plp__card:hover,
+.recommended__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.deals__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Image Hover Zoom ── */
+.plp__card-img,
+.recommended__card-img,
+.deals__card-img,
+.plp__list-img,
+.pdp__thumb,
+.pdp__main-img {
+    transition: transform 0.4s ease;
+}
+
+.plp__card:hover .plp__card-img,
+.recommended__card:hover .recommended__card-img,
+.deals__card:hover .deals__card-img {
+    transform: scale(1.08);
+}
+
+.plp__list-item:hover .plp__list-img {
+    transform: scale(1.05);
+}
+
+/* ── List View Items ── */
+.plp__list-item {
+    animation: slideInLeft 0.4s ease-out both;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.plp__list-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.plp__list-item:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.plp__list-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.plp__list-item:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.plp__list-item:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.plp__list-item:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.plp__list-item:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+/* ── Button Hover Effects ── */
+.plp__filter-apply,
+.plp__clear-btn,
+.category-panel__banner-btn,
+.hero__banner-btn,
+.hero__user-btn,
+.cart__checkout-btn,
+.cart__shop-btn,
+.checkout__next-btn,
+.checkout__place-btn,
+.auth__submit {
+    transition: transform 0.2s ease, opacity 0.2s ease,
+        box-shadow 0.3s ease, background 0.2s ease;
+}
+
+.plp__filter-apply:hover,
+.cart__checkout-btn:hover,
+.cart__shop-btn:hover,
+.category-panel__banner-btn:hover,
+.hero__banner-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+}
+
+/* ── Filter Sidebar Animation ── */
+.plp__sidebar {
+    animation: slideInLeft 0.3s ease-out;
+}
+
+.plp__filter-section {
+    animation: fadeIn 0.4s ease-out both;
+}
+
+.plp__filter-section:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.plp__filter-section:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.plp__filter-section:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.plp__filter-section:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.plp__filter-section:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.plp__filter-section:nth-child(6) {
+    animation-delay: 0.35s;
+}
+
+/* ── Filter Chip Animations ── */
+.plp__filter-chip {
+    animation: scaleIn 0.2s ease-out;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.plp__filter-chip:hover {
+    transform: scale(1.05);
+    background: #d0e3ff;
+}
+
+/* ── Category sidebar active state indicator ── */
+.plp__filter-item {
+    position: relative;
+    padding-left: 0;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.plp__filter-item--active {
+    padding-left: 12px;
+}
+
+.plp__filter-item--active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+    animation: scaleIn 0.2s ease-out;
+}
+
+/* ── Home Page Section Animations ── */
+.hero__wrapper {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.deals {
+    animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.category-panel {
+    animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.category-panel__item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.2s ease;
+}
+
+.category-panel__item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    background: #F0F6FF;
+}
+
+.recommended__grid {
+    animation: fadeIn 0.5s ease-out 0.3s both;
+}
+
+/* ── Inquiry / Extra Services ── */
+.extra-service__card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.extra-service__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Pagination Buttons ── */
+.plp__page-btn {
+    transition: all 0.2s ease, transform 0.2s ease;
+}
+
+.plp__page-btn:hover {
+    transform: translateY(-2px);
+}
+
+.plp__page-btn--active {
+    animation: pulseGlow 1.5s ease infinite;
+}
+
+/* ── Toolbar Animation ── */
+.plp__toolbar {
+    animation: slideInRight 0.3s ease-out;
+}
+
+/* ── View Toggle Active ── */
+.plp__view-btn {
+    transition: all 0.2s ease, transform 0.2s ease;
+}
+
+.plp__view-btn:hover {
+    transform: scale(1.1);
+}
+
+.plp__view-btn--active {
+    transform: scale(1.05);
+}
+
+/* ── Sort Select ── */
+.plp__sort-select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plp__sort-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+/* ── Product Detail Page ── */
+.pdp__gallery {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.pdp__info {
+    animation: slideInRight 0.4s ease-out;
+}
+
+.pdp__thumb {
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.pdp__thumb:hover {
+    transform: scale(1.1);
+}
+
+.pdp__tab {
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ── Cart Page ── */
+.cart__item {
+    animation: slideInLeft 0.3s ease-out both;
+    transition: box-shadow 0.3s ease;
+}
+
+.cart__item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.cart__item:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.cart__item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.cart__item:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.cart__item:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.cart__summary {
+    animation: slideInRight 0.4s ease-out;
+}
+
+.cart__qty-btn {
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.cart__qty-btn:hover {
+    transform: scale(1.15);
+}
+
+.cart__qty-btn:active {
+    transform: scale(0.95);
+}
+
+/* ── Checkout Steps ── */
+.checkout__step-circle {
+    transition: all 0.3s ease;
+}
+
+.checkout__section {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.checkout__payment-option {
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.checkout__payment-option:hover {
+    transform: translateY(-2px);
+}
+
+/* ── Auth Page ── */
+.auth__wrapper {
+    animation: scaleIn 0.4s ease-out;
+}
+
+.auth__brand {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.auth__form-card {
+    animation: slideInRight 0.5s ease-out;
+}
+
+.auth__input {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.auth__input:focus {
+    transform: translateY(-1px);
+}
+
+/* ── Header Nav Links ── */
+.header__nav-link {
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.header__nav-link:hover {
+    transform: translateY(-1px);
+}
+
+/* ── Footer Links ── */
+.footer a {
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer a:hover {
+    transform: translateX(2px);
+}
+
+/* ── Smooth scrollbar ── */
+* {
+    scroll-behavior: smooth;
+}
+
+/* ── Focus visible ring ── */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ── Loading skeleton shimmer ── */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease infinite;
+    border-radius: 4px;
+}
+
+/* ============================================
+   SCROLL-REVEAL ANIMATIONS
+   Elements start hidden and animate in when
+   they enter the viewport via IntersectionObserver.
+   ============================================ */
+
+/* Base reveal (fade up) */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide from left */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-left.reveal--visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Slide from right */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-right.reveal--visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale up */
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-scale.reveal--visible {
+    opacity: 1;
+    transform: scale(1);
+}
